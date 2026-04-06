@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Catastrophe de Bhopal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background: #F5F5F5;
+            color: #2C2C2C;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(52, 73, 94, 0.03) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(44, 62, 80, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .page {
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1A3A52 0%, #2C5282 100%);
+            padding: 60px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 20px,
+                rgba(255,255,255,0.08) 20px,
+                rgba(255,255,255,0.08) 40px
+            );
+            animation: slide 15s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(100px); }
+        }
+
+        header h1 {
+            font-size: 2.8em;
+            margin-bottom: 12px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+            animation: slideDown 0.8s ease-out;
+            font-weight: 700;
+            letter-spacing: 0px;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header p {
+            font-size: 1.1em;
+            position: relative;
+            z-index: 2;
+            font-weight: 300;
+            letter-spacing: 0.3px;
+            font-style: normal;
+            opacity: 0.95;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            position: relative;
+        }
+
+        /* Floating navigation hub */
+        .nav-hub {
+            position: sticky;
+            top: 40px;
+            width: 200px;
+            flex-shrink: 0;
+            background: white;
+            border-radius: 12px;
+            padding: 25px 15px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            backdrop-filter: none;
+            border: 1px solid #E0E0E0;
+        }
+
+        .center-circle {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #2C5282, #1A3A52);
+            border-radius: 8px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            text-align: center;
+            font-size: 0.85em;
+            box-shadow: 0 4px 12px rgba(44, 82, 130, 0.15);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 4px 12px rgba(44, 82, 130, 0.15); }
+            50% { box-shadow: 0 6px 18px rgba(44, 82, 130, 0.25); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: white;
+            font-size: 0.9em;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: none;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: left 0.3s;
+            z-index: 1;
+        }
+
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-btn.active {
+            transform: translateY(0px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            opacity: 0.95;
+        }
+
+        .btn-comment { background: #2C5282; }
+        .btn-immediate { background: #34495E; }
+        .btn-long-term { background: #16A085; }
+        .btn-cleanup { background: #D68910; color: white; }
+        .btn-solutions { background: #27AE60; }
+        .btn-reaction { background: #8E44AD; }
+        .btn-sources { background: #555555; }
+
+        .btn-cleanup.active, .btn-cleanup:hover { filter: brightness(0.9); }
+
+        /* Content display area */
+        .content-area {
+            flex: 1;
+            position: relative;
+            background: white;
+            border-radius: 12px;
+            padding: 45px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            backdrop-filter: none;
+            border: 1px solid #E8E8E8;
+        }
+
+        .content-box {
+            animation: fadeIn 0.5s ease-out;
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .content-box h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #1A3A52;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .content-box h3 {
+            font-size: 1.35em;
+            margin: 30px 0 15px 0;
+            color: #2C5282;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 12px;
+        }
+
+        .content-box p {
+            font-size: 1em;
+            line-height: 1.8;
+            color: #3C3C3C;
+            margin-bottom: 20px;
+        }
+
+        .content-box:nth-child(2) {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .content-box:nth-child(3) {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .content-box:nth-child(4) {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .content-box:nth-child(5) {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .content-box:nth-child(6) {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes slideInFromTopLeft {
+            from {
+                opacity: 0;
+                transform: translate(-100px, -100px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+        }
+
+        @keyframes slideInFromBottomRight {
+            from {
+                opacity: 0;
+                transform: translate(100px, 100px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+        }
+
+        @keyframes slideInFromTopRight {
+            from {
+                opacity: 0;
+                transform: translate(100px, -100px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+        }
+
+        @keyframes slideInFromBottomLeft {
+            from {
+                opacity: 0;
+                transform: translate(-100px, 100px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+        }
+
+        @keyframes slideInFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-80px) rotateY(-20deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) rotateY(0deg);
+            }
+        }
+
+        @keyframes slideInFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(80px) rotateY(20deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) rotateY(0deg);
+            }
+        }
+
+        .content-box {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border-top: 4px solid #2C5282;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(44, 82, 130, 0.03) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .content-box > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .content-box ul, .content-box ol {
+            margin-left: 25px;
+            margin-top: 12px;
+        }
+
+        .content-box li {
+            margin-bottom: 15px;
+            line-height: 1.8;
+            animation: slideInList 0.5s ease-out forwards;
+            opacity: 0;
+            padding-left: 5px;
+            color: #444;
+        }
+
+        .content-box li:nth-child(1) { animation-delay: 0.05s; }
+        .content-box li:nth-child(2) { animation-delay: 0.1s; }
+        .content-box li:nth-child(3) { animation-delay: 0.15s; }
+        .content-box li:nth-child(4) { animation-delay: 0.2s; }
+        .content-box li:nth-child(5) { animation-delay: 0.25s; }
+        .content-box li:nth-child(6) { animation-delay: 0.3s; }
+        .content-box li:nth-child(7) { animation-delay: 0.35s; }
+
+        @keyframes slideInList {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .highlight {
+            background: #E8F4F8;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 600;
+            box-shadow: none;
+            position: relative;
+            color: #1A3A52;
+            border-left: 3px solid #2C5282;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .info-card {
+            padding: 15px;
+            border-radius: 8px;
+            color: white;
+            text-align: center;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            animation: fadeIn 0.5s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .info-card:nth-child(1) { animation-delay: 0s; }
+        .info-card:nth-child(2) { animation-delay: 0s; }
+        .info-card:nth-child(3) { animation-delay: 0s; }
+
+        .info-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-1 { background: #2C5282; }
+        .card-2 { background: #34495E; }
+        .card-3 { background: #16A085; }
+        .card-4 { background: #27AE60; }
+        .card-5 { background: #C0392B; }
+        .card-6 { background: #8E44AD; }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .two-column > div {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 12px;
+            backdrop-filter: blur(5px);
+        }
+
+        .feature-box {
+            background: #F8F8F8;
+            padding: 15px;
+            border-left: 3px solid #2C5282;
+            border-radius: 6px;
+            margin: 8px 0;
+            animation: slideInFeature 0.3s ease-out;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-box:hover {
+            background: #F0F4F8;
+            border-left-width: 5px;
+            padding-left: 12px;
+            box-shadow: 0 2px 6px rgba(44, 82, 130, 0.1);
+        }
+
+        @keyframes slideInFeature {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .equation {
+            background: #F8F8F8;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid #2C5282;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+            font-size: 1.05em;
+            letter-spacing: 0.3px;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(44, 82, 130, 0.08);
+            position: relative;
+            overflow: hidden;
+            color: #1A3A52;
+        }
+
+        .equation:hover {
+            box-shadow: 0 4px 12px rgba(44, 82, 130, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .audio-controls {
+            background: linear-gradient(135deg, rgba(255, 77, 125, 0.05), rgba(255, 140, 0, 0.05));
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 77, 125, 0.2);
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .audio-player {
+            width: 100%;
+            margin-top: 8px;
+            height: 30px;
+            cursor: pointer;
+            accent-color: #FF4D7D;
+        }
+
+        .audio-player::-webkit-media-controls-mute-button {
+            filter: brightness(0.8);
+        }
+
+        footer {
+            background: linear-gradient(135deg, #1A3A52 0%, #2C5282 100%);
+            color: white;
+            text-align: center;
+            padding: 40px 30px 30px 30px;
+            margin-top: 80px;
+            font-size: 0.9em;
+            position: relative;
+            z-index: 10;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .nav-hub {
+                position: relative;
+                top: 0;
+                width: 100%;
+                display: flex;
+                gap: 20px;
+                align-items: flex-start;
+            }
+
+            .nav-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+                width: 100%;
+            }
+
+            .nav-btn {
+                flex: 1;
+                min-width: 120px;
+            }
+
+            .center-circle {
+                width: 100px;
+                height: 100px;
+                margin: 0;
+                font-size: 0.85em;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+
+            .content-box {
+                padding: 25px;
+            }
+
+            .content-box h2 {
+                font-size: 1.8em;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .feature {
+            background: #F8F8F8;
+            padding: 10px 12px;
+            border-left: 3px solid #2C5282;
+            border-radius: 4px;
+            margin: 8px 0;
+            animation: slideInFeature 0.3s ease-out;
+            transition: all 0.2s;
+            position: relative;
+            left: 0;
+            color: #2C2C2C;
+        }
+
+        .feature:hover {
+            background: #F0F4F8;
+            border-left-width: 5px;
+            padding-left: 10px;
+            box-shadow: 0 2px 6px rgba(44, 82, 130, 0.1);
+            left: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Persistent Audio Player -->
+    <audio id="backgroundAudio" style="display: none;">
+        <source src="music/ambiant.flac" type="audio/flac">
+    </audio>
+    
+    <div class="page">
+        <header>
+            <h1>La Catastrophe de Bhopal</h1>
+            <p>Discovering the human cost of industrial negligence</p>
+        </header>
+
+        <div class="container">
+            <!-- Navigation Hub -->
+            <div class="nav-hub">
+                <div class="center-circle">BHOPAL<br>1984</div>
+                <div class="nav-buttons">
+                    <button class="nav-btn btn-comment active" onclick="showSection('comment')">Comment</button>
+                    <button class="nav-btn btn-immediate" onclick="showSection('immediate')">Immédiat</button>
+                    <button class="nav-btn btn-long-term" onclick="showSection('long-term')">Long Terme</button>
+                    <button class="nav-btn btn-cleanup" onclick="showSection('cleanup')">Nettoyage</button>
+                    <button class="nav-btn btn-solutions" onclick="showSection('solutions')">Solutions</button>
+                    <button class="nav-btn btn-reaction" onclick="showSection('reaction')">Réaction</button>
+                    <button class="nav-btn btn-sources" onclick="showSection('sources')">Sources</button>
+                </div>
+            </div>
+
+            <!-- Content Display Area -->
+            <div class="content-area">
+                <!-- CAUSE SECTION -->
+                <div id="comment" class="content-box">
+                    <h2>Comment et Pourquoi</h2>
+                    <p>La catastrophe de Bhopal s'est déroulée du <span class="highlight">2 au 3 décembre 1984</span>, lorsqu'une grande fuite de gaz <span class="highlight">isocyanate de méthyle (MIC)</span> s'est produite. Cet incident à l'usine de pesticides Union Carbide en Inde devint l'une des pires catastrophes industrielles, affectant plusieurs centaines de milliers de personnes en quelques heures.</p>
+                    <p>La fuite s'est produite pendant une nuit ordinaire. Ce qui aurait pu être un problème technique facile à gérer devint rapidement une tragédie. L'usine produisait un pesticide commun. Le MIC dans le réservoir numéro 610 était normalement stable quand bien entreposé. Cependant, plusieurs erreurs et mauvaises décisions prirent le relais. Ces problèmes auraient transformé ce site industriel en source de mort et de souffrance massive.</p>
+                    <p>Cette catastrophe n'était pas un simple accident. Elle était le résultat direct de négligence et d'une culture qui plaçait le profit avant la sécurité. L'usine n'était pas prête pour les urgences. Une enquête plus tard révéla que pratiquement tous les systèmes de sécurité avaient échoué. Certains avaient même été volontairement arrêtés pour économiser de l'argent.</p>
+                    
+                    <div class="card-grid">
+                        <div class="info-card card-1">Systèmes de Sécurité Négligés</div>
+                        <div class="info-card card-2">Conception Défaillante</div>
+                        <div class="info-card card-5">Réductions de Coûts</div>
+                    </div>
+
+                    <h3>Défaillances Clés</h3>
+                    <ul>
+                        <li><strong>Réfrigération non fonctionnelle</strong> - Les unités critiques ne fonctionnaient pas</li>
+                        <li><strong>Alarmes désactivées</strong> - Aucun avertissement n'a été donné</li>
+                        <li><strong>Maintenance inadéquate</strong> - L'usine était en mauvais état</li>
+                        <li><strong>Équipe sous-dotée</strong> - Peu de personnel pour superviser</li>
+                        <li><strong>Eau dans le MIC</strong> - Déclenchement d'une réaction chimique violente</li>
+                    </ul>
+
+                    <h3>La Chaîne des Défaillances</h3>
+                    <p>Cette nuit-là, une série de problèmes se développa l'un après l'autre vers la catastrophe. De l'eau entra dans le réservoir MIC par un tuyau mal isolé. Cela déclencha une réaction chimique qui libère de la chaleur. La température à l'intérieur du réservoir monta rapidement, augmentant la pression. Les systèmes qui auraient dû arrêter cette réaction – plutôt comme refroidir le tuyau – avaient tous échoué ou n'avaient jamais été bien installés.</p>
+                    <p>À 00h30 le 3 décembre, le disque de rupture du réservoir se brisa. Environ 30 tonnes de gaz MIC toxique s'échappèrent dans l'air. Le gaz forma un nuage blanc qui se déplaça lentement sur la ville endormie de Bhopal. <strong>La pression augmenta rapidement, libérant du gaz toxique dans la ville sans avertissement. Les sirènes ne sonneront pas et il n'y avait aucun plan d'évacuation. Les habitants se réveillèrent en suffoquant, les yeux brûlant, incapables de respirer.</strong></p>
+
+                </div>
+
+                <!-- IMMEDIATE EFFECTS SECTION -->
+                <div id="immediate" class="content-box hidden">
+                    <h2>Effets Immédiats</h2>
+                    <p>Quand le nuage de gaz se propagea sur Bhopal, les effets furent <span class="highlight">dévastateurs et immédiats</span>. En quelques heures, plus d'un demi-million de personnes furent exposées au gaz toxique. Aucun système de santé local n'était préparé. La panique s'installa alors que les gens réalisèrent que quelque chose allait très mal. Beaucoup ne savaient pas ce qui se passait ou comment réagir. Certains coururent vers la gare pour fuir, suffoquant en chemin. D'autres s'effondrèrent dans les rues, complètement paniqués.</p>
+                    <p>Le système médical local n'était pas prêt. Les hôpitaux reçurent des centaines, puis des milliers de patients en même temps. Les médecins ne savaient pas bien comment traiter l'exposition au MIC. Il n'y avait presque rien écrit sur le traitement des victimes du MIC en masse. Les patients arrivaient les yeux fermés, incapables de respirer, beaucoup inconscients. Des rangées de corps gisaient dehors des hôpitaux. Il y avait trop de victimes pour tous les traiter. Dans les jours et semaines qui suivirent, le nombre de morts monta. Environ 4 000 à 5 000 morts furent confirmés officiellement, bien que les vrais chiffres fussent probablement plus élevés.</p>
+
+                    <div class="two-column">
+                        <div>
+                            <h3>Santé Humaine</h3>
+                            <div class="feature">Détresse respiratoire grave</div>
+                            <div class="feature">Irritation oculaire et cécité</div>
+                            <div class="feature">Brûlures chimiques</div>
+                            <div class="feature">Convulsions et vomissements</div>
+                            <div class="feature">Dizaines de milliers de décès</div>
+                            <div class="feature">Plus d'un demi-million exposés</div>
+                        </div>
+                        <div>
+                            <h3>Environnement</h3>
+                            <div class="feature">Contamination du sol</div>
+                            <div class="feature">Contamination de l'eau</div>
+                            <div class="feature">Mort du bétail et faune</div>
+                            <div class="feature">Résidus chimiques persistants</div>
+                            <div class="feature">Nuage blanc toxique</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- LONG TERM EFFECTS SECTION -->
+                <div id="long-term" class="content-box hidden">
+                    <h2>Effets à Long Terme</h2>
+                    <p>Les conséquences ne se sont pas arrêtées en 1984. Elles persistent <span class="highlight">des décennies plus tard</span>. Pour les survivants de Bhopal, la catastrophe ne fut pas une tragédie unique à surmonter. Elle marqua le début d'une souffrance qui durerait toute une vie. Les enfants nés après l'exposition héritèrent de problèmes de santé. Les générations futures portèrent les cicatrices chimiques de cette nuit dans leurs corps. Même quarante ans plus tard, les hôpitaux locaux continuent de traiter des patients dont les problèmes de santé viennent directement de l'exposition au MIC en 1984.</p>
+                    <p>Les maladies chroniques qui émergèrent dans les années suivantes furent tout aussi dévastatrices que la tragédie initiale, bien qu'elles soient passées silencieusement, loin des regards du monde. Les taux de cancer augmentèrent beaucoup. Les femmes exposées eurent des problèmes reproductifs anormalement élevés. Les troubles respiratoires chroniques rendirent des millions de personnes incapables de travailler même légèrement. Les survivants décrivirent une vie de douleur constante, de limitation physique et de trauma psychologique qui ne disparaît jamais entièrement.</p>
+                    
+                    <div class="card-grid">
+                        <div class="info-card card-3">Santé Chronique</div>
+                        <div class="info-card card-4">Écosystème</div>
+                    </div>
+
+                    <h3>Santé Humaine</h3>
+                    <ul>
+                        <li>Maladies respiratoires chroniques</li>
+                        <li>Dommages oculaires persistants</li>
+                        <li>Troubles neurologiques</li>
+                        <li>Problèmes reproductifs et infertilité</li>
+                        <li>Taux accru de cancer</li>
+                        <li>Malformations congénitales</li>
+                        <li>Traumatisme psychologique</li>
+                    </ul>
+
+                    <h3>Environnement</h3>
+                    <ul>
+                        <li>Sol contaminé par métaux lourds</li>
+                        <li>Eaux souterraines polluées</li>
+                        <li>Site d'usine encore dangereux</li>
+                        <li>Récupération écosystérique lente</li>
+                        <li>Polluants qui persistent</li>
+                    </ul>
+
+                </div>
+
+                <!-- CLEANUP SECTION -->
+                <div id="cleanup" class="content-box hidden">
+                    <h2>Efforts de Nettoyage</h2>
+                    <p style="color: #c0392b; font-weight: 600; margin: 15px 0; opacity: 0.95;">Le nettoyage a été lent, incomplet et problématique. Quarante ans après la catastrophe, le site d'usine reste contaminé, et les habitants continuent de vivre avec de l'eau dangereuse.</p>
+                    <p>Immédiatement après la catastrophe, Union Carbide et le gouvernement indien présentèrent les tentatives de nettoyage comme des succès. En réalité, ces efforts ne furent pas suffisants. La plupart des sols contaminés ne furent jamais excavés. À la place, des sections furent simplement couvertes de béton – ce qui ne résolut rien. L'eau souterraine restait toxique et aurait nécessité un traitement massif et coûteux. Personne n'était prêt à financer cela. Les résidents n'eurent d'autre choix que de continuer à vivre près du danger, utilisant l'eau polluée pour cuisiner et boire.</p>
+                    <p>Les gouvernements local et national ne fournirent jamais assez d'argent pour un vrai nettoyage. Les tribunaux ordonnèrent à Union Carbide de payer. Cependant, les montants donnés aux victimes étaient très faibles comparés aux dommages. Beaucoup de survivants reçurent moins de mille dollars en compensation. C'était loin de suffisant pour une vie entière de maladie et de souffrance. Union Carbide quitta le site dans les années 1990, laissant le problème à l'Inde. Le site reste jusqu'à aujourd'hui contaminé, un rappel de la négligence corporative.</p>
+
+                    <h3>Méthodes Utilisées</h3>
+                    <ul>
+                        <li>Enlèvement partiel de sols contaminés</li>
+                        <li>Encapsulation en béton (incomplet)</li>
+                        <li>Traitement limité des eaux souterraines</li>
+                        <li>Projets gouvernementaux retardés</li>
+                        <li>Litiges juridiques constants</li>
+                    </ul>
+
+                    <h3>Situation Actuelle</h3>
+                    <div class="card-grid">
+                        <div class="info-card card-5">Pas entièrement décontaminé</div>
+                        <div class="info-card card-5">Résidents toujours affectés</div>
+                        <div class="info-card card-5">Eau polluée encore utilisée</div>
+                    </div>
+
+                    <p style="margin-top: 20px; padding: 15px; background: #FFF5E6; border-radius: 8px; border-left: 5px solid #FF8C00;"><strong>Aujourd'hui,</strong> le site n'est pas totalement décontaminé, et de nombreux résidents dépendent toujours d'eau polluée.</p>
+                </div>
+
+                <!-- SOLUTIONS SECTION -->
+                <div id="solutions" class="content-box hidden">
+                    <h2>Solutions et Prévention</h2>
+
+                    <div class="two-column">
+                        <div>
+                            <h3>Traiter les Conséquences</h3>
+                            <div class="feature">Nettoyage complet avec technologie moderne</div>
+                            <div class="feature">Soutien médical long terme</div>
+                            <div class="feature">Eau potable sûre</div>
+                            <div class="feature">Compensation transparente</div>
+                            <div class="feature">Surveillance indépendante</div>
+                        </div>
+                        <div>
+                            <h3>Prévenir à l'Avenir</h3>
+                            <div class="feature">Normes strictes de sécurité</div>
+                            <div class="feature">Maintenance obligatoire</div>
+                            <div class="feature">Quantités réduites de toxiques</div>
+                            <div class="feature">Inspections régulières indépendantes</div>
+                            <div class="feature">Responsabilité avec vraies conséquences</div>
+                        </div>
+                    </div>
+
+                    <p>Les leçons de Bhopal forcèrent une réévaluation des normes de sécurité industrielle mondialement. De multiples commissions internationales et lois – notamment la Directive Seveso en Europe et la Loi du Droit à Savoir aux États-Unis – furent créées directement en réponse aux défaillances à Bhopal. Ces changements de politique ont sauvé d'innombrables vies en exigeant que les usines ayant des substances dangereuses mettent en place des systèmes de sécurité appropriés, informent le public sur les produits chimiques dangereux, et créent des plans d'urgence détaillés.</p>
+                    <p>Cependant, les lois seules ne suffisent jamais. Elles doivent être appliquées fortement. Surtout, une organisation doit placer la sécurité et le bien-être humain avant le profit. Bhopal montra ce qui se passe quand une corporation choisit d'économiser l'argent. Elle arrête les alarmes pour économiser l'électricité. Elle embauche du personnel moins qualifié pour économiser. Elle entrepose des quantités dangereuses de produits chimiques près de villes peuplées. <em>La catastrophe de Bhopal montre que le développement industriel sans sécurité, transparence et responsabilité mène à la tragédie. Elle nous rappelle que les enjeux sont les vies réelles de gens réels.</em>
+                </div>
+
+                <!-- CHEMICAL REACTION SECTION -->
+                <div id="reaction" class="content-box hidden">
+                    <h2>Réaction Chimique</h2>
+                    <p>Plusieurs observations montrent qu'une <span class="highlight">réaction chimique</span> se produisit à l'intérieur du réservoir. La température monta soudainement. La pression augmenta en quelques minutes seulement. Le MIC liquide devint du gaz qui s'échappa rapidement. Cette transformation de liquide à gaz était le pire scénario possible, mais l'usine n'était pas prête.</p>
+                    <p>Le MIC – isocyanate de méthyle – est un chimique très réactif et très toxique. C'est utilisé dans la production d'insecticides. Quand l'eau touche le MIC, une réaction se produit – une réaction qui libère de la chaleur. Cela accélère la réaction, ce qui génère plus de chaleur. Un cycle commence où plus de réaction crée plus de chaleur. À mesure que la température augmente, le MIC liquide s'évapore plus rapidement, formant une bombe de pression chimique. Dans les systèmes bien conçus, cette réaction est contrôlée. Le MIC est refroidi pour absorber la chaleur. Mais à Bhopal, tous ces systèmes avaient échoué ou avaient été arrêtés.</p>
+
+                    <div class="card-grid">
+                        <div class="info-card card-3">Réaction Exothermique Violente</div>
+                        <div class="info-card card-3">Accumulation de Pression</div>
+                        <div class="info-card card-3">Rupture Catastrophique</div>
+                    </div>
+
+                    <h3>Équation Word</h3>
+                    <div class="equation">
+                        Isocyanate de méthyle + Eau → Méthylamine + Dioxyde de carbone
+                    </div>
+
+                    <h3>Équation Chimique Balancée</h3>
+                    <div class="equation">
+                        CH₃NCO + H₂O → CH₃NH₂ + CO₂
+                    </div>
+
+                    <div class="two-column">
+                        <div>
+                            <h3>Composants</h3>
+                            <div class="feature">CH₃NCO = Isocyanate de méthyle</div>
+                            <div class="feature">H₂O = Eau</div>
+                            <div class="feature">CH₃NH₂ = Méthylamine</div>
+                            <div class="feature">CO₂ = Dioxyde de carbone</div>
+                        </div>
+                        <div>
+                            <h3>L'Équation est Balancée</h3>
+                            <div class="feature">1 carbone chaque côté</div>
+                            <div class="feature">3 hydrogènes chaque côté</div>
+                            <div class="feature">1 azote chaque côté</div>
+                            <div class="feature">2 oxygènes chaque côté</div>
+                        </div>
+                    </div>
+
+                    <h3>Type de Réaction</h3>
+                    <div class="equation" style="border-color: #4169E1; background: #E6F3FF;">
+                        RÉACTION D'HYDROLYSE
+                    </div>
+
+                    <h3>Détails de la Réaction</h3>
+                    <p>L'équation CH₃NCO + H₂O → CH₃NH₂ + CO₂ semble simple écrite, mais elle représente un processus chimique intense avec des conséquences catastrophiques. Quand l'eau touche le MIC, les molécules se brisent et se recombinent instantanément en méthylamine et dioxyde de carbone. Ces deux produits ensemble créent une réaction qui libère beaucoup de chaleur très rapidement.</p>
+                    <p>Cette libération de chaleur soudaine cause la catastrophe. Dans un système fermé – comme un réservoir rempli de MIC – la chaleur doit aller quelque part. Elle augmente la température à l'intérieur du réservoir. À mesure que la température monte, le MIC liquide s'évapore plus rapidement, formant du gaz. Ce gaz nouveau augmente la pression. La pression plus élevée accélère la réaction chimique. Un cycle commence : Plus de réaction = Plus de chaleur = Plus de vapeur = Plus de pression = Plus de réaction. Sans un système de refroidissement ou un système pour libérer la pression lentement, le réservoir atteint des niveaux dangereux rapidement. Le disque de rupture du réservoir – conçu comme dernière défense – se brisa finalement, et 40 tonnes de gaz toxique s'échappèrent dans la nuit.</p>
+                </div>
+
+                <!-- SOURCES SECTION -->
+                <div id="sources" class="content-box hidden">
+                    <h2>Sources</h2>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 - Résumé Éducatif Interactif de la Catastrophe de Bhopal | Une Importante Leçon en Sécurité Industrielle</p>
+        </footer>
+    </div>
+
+    <script>
+        // Persistent background audio
+        document.addEventListener('DOMContentLoaded', () => {
+            const backgroundAudio = document.getElementById('backgroundAudio');
+            backgroundAudio.volume = 0.3;
+            backgroundAudio.loop = true;
+            
+            // Start playing when page loads
+            backgroundAudio.play().catch(err => {
+                console.log('Audio autoplay prevented by browser');
+            });
+        });
+
+        function showSection(sectionId) {
+            // Hide all sections
+            const allSections = document.querySelectorAll('.content-box');
+            allSections.forEach(section => section.classList.add('hidden'));
+
+            // Show selected section
+            const selectedSection = document.getElementById(sectionId);
+            if (selectedSection) {
+                selectedSection.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // Update active button
+            const allButtons = document.querySelectorAll('.nav-btn');
+            allButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Find and activate the clicked button
+            event.target.classList.add('active');
+            
+            // Background audio continues playing (no interruption)
+        }
+    </script>
+</body>
+</html>
