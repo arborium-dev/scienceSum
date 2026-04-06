@@ -118,13 +118,7 @@
             height: 400px;
             background: radial-gradient(circle, rgba(252, 11, 105, 0.2) 0%, transparent 70%);
             transform: translateX(-50%);
-            animation: floatGlow 8s ease-in-out infinite;
             pointer-events: none;
-        }
-
-        @keyframes floatGlow {
-            0%, 100% { transform: translateX(-50%) translateY(0px) scale(1); opacity: 0.5; }
-            50% { transform: translateX(-50%) translateY(-20px) scale(1.1); opacity: 0.8; }
         }
 
         header h1 {
@@ -186,7 +180,7 @@
         .center-circle {
             width: 100px;
             height: 100px;
-            background: linear-gradient(135deg, var(--color-primary), var(--color-dark-primary));
+            background: var(--color-primary);
             border-radius: 8px;
             margin: 0 auto 20px;
             display: flex;
@@ -197,13 +191,9 @@
             text-align: center;
             font-size: 0.85em;
             box-shadow: 0 4px 12px rgba(252, 11, 105, 0.5);
-            animation: pulse 2s ease-in-out infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 4px 12px rgba(252, 11, 105, 0.5); }
-            50% { box-shadow: 0 6px 18px rgba(252, 11, 105, 0.8); }
-        }
+
 
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
