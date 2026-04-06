@@ -5,19 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Catastrophe de Bhopal</title>
     <style>
+        :root {
+            /* Default Palette (Current) */
+            --color-primary: #fc0b69;
+            --color-background: #09001f;
+            --color-accent: #001837;
+            --color-accent-light: #002f6d;
+            --color-accent-bright: #004db3;
+            --color-text: #ffffff;
+            --color-dark-primary: #bc0b39;
+        }
+
+        body {
+            /* Default Palette (Current) */
+            --color-primary: #fc0b69;
+            --color-background: #09001f;
+            --color-accent: #001837;
+            --color-accent-light: #002f6d;
+            --color-accent-bright: #004db3;
+            --color-text: #ffffff;
+            --color-dark-primary: #bc0b39;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
-            background: #F5F5F5;
-            color: #2C2C2C;
+            background: var(--color-background);
+            color: var(--color-text);
             line-height: 1.6;
             min-height: 100vh;
             overflow-x: hidden;
+            transition: background-color 0.6s ease, color 0.6s ease;
         }
 
         /* Animated background */
@@ -28,11 +52,47 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 20% 50%, rgba(52, 73, 94, 0.03) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(44, 62, 80, 0.03) 0%, transparent 50%);
+            background: radial-gradient(circle at 20% 50%, rgba(252, 11, 105, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(188, 11, 57, 0.08) 0%, transparent 50%);
             pointer-events: none;
             z-index: 0;
         }
+
+        /* Cool decorative circle */
+        .coolCircle {
+            position: fixed;
+            right: 50px;
+            top: 100px;
+            width: 500px;
+            height: 500px;
+            z-index: 1;
+            border: 15px solid var(--color-primary);
+            border-radius: 50%;
+            opacity: 0.25;
+            animation: circleRotate 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes circleRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Decorative triangle */
+        .decorTriangle {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            width: 300px;
+            height: 300px;
+            background: var(--color-primary);
+            opacity: 0.12;
+            clip-path: polygon(100% 0, 100% 100%, 0 100%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+
 
         .page {
             position: relative;
@@ -40,10 +100,10 @@
         }
 
         header {
-            background: linear-gradient(135deg, #1A3A52 0%, #2C5282 100%);
+            background: linear-gradient(135deg, var(--color-dark-primary) 0%, var(--color-primary) 100%);
             padding: 60px 20px;
             text-align: center;
-            color: white;
+            color: var(--color-text);
             position: relative;
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -56,7 +116,7 @@
             left: 50%;
             width: 400px;
             height: 400px;
-            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(252, 11, 105, 0.2) 0%, transparent 70%);
             transform: translateX(-50%);
             animation: floatGlow 8s ease-in-out infinite;
             pointer-events: none;
@@ -115,34 +175,34 @@
             top: 40px;
             width: 200px;
             flex-shrink: 0;
-            background: white;
+            background: rgba(252, 11, 105, 0.15);
             border-radius: 12px;
             padding: 25px 15px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 2px 12px rgba(252, 11, 105, 0.2);
             backdrop-filter: none;
-            border: 1px solid #E0E0E0;
+            border: 1px solid rgba(252, 11, 105, 0.3);
         }
 
         .center-circle {
             width: 100px;
             height: 100px;
-            background: linear-gradient(135deg, #2C5282, #1A3A52);
+            background: linear-gradient(135deg, var(--color-primary), var(--color-dark-primary));
             border-radius: 8px;
             margin: 0 auto 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: var(--color-text);
             font-weight: 600;
             text-align: center;
             font-size: 0.85em;
-            box-shadow: 0 4px 12px rgba(44, 82, 130, 0.15);
+            box-shadow: 0 4px 12px rgba(252, 11, 105, 0.5);
             animation: pulse 2s ease-in-out infinite;
         }
 
         @keyframes pulse {
-            0%, 100% { box-shadow: 0 4px 12px rgba(44, 82, 130, 0.15); }
-            50% { box-shadow: 0 6px 18px rgba(44, 82, 130, 0.25); }
+            0%, 100% { box-shadow: 0 4px 12px rgba(252, 11, 105, 0.5); }
+            50% { box-shadow: 0 6px 18px rgba(252, 11, 105, 0.8); }
         }
 
         @keyframes float {
@@ -163,11 +223,11 @@
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s;
-            color: white;
+            color: var(--color-text);
             font-size: 0.9em;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
             border: none;
         }
 
@@ -178,7 +238,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
             transition: left 0.3s;
             z-index: 1;
         }
@@ -189,22 +249,22 @@
 
         .nav-btn:hover {
             transform: translateY(-1px);
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 2px 6px rgba(252, 11, 105, 0.5);
         }
 
         .nav-btn.active {
             transform: translateY(0px);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 8px rgba(252, 11, 105, 0.4);
             opacity: 0.95;
         }
 
-        .btn-comment { background: #2C5282; }
-        .btn-immediate { background: #34495E; }
-        .btn-long-term { background: #16A085; }
-        .btn-cleanup { background: #D68910; color: white; }
-        .btn-solutions { background: #27AE60; }
-        .btn-reaction { background: #8E44AD; }
-        .btn-sources { background: #555555; }
+        .btn-comment { background: var(--color-primary); }
+        .btn-immediate { background: var(--color-dark-primary); }
+        .btn-long-term { background: var(--color-accent-bright); }
+        .btn-cleanup { background: var(--color-accent-light); }
+        .btn-solutions { background: var(--color-primary); }
+        .btn-reaction { background: var(--color-accent-light); }
+        .btn-sources { background: var(--color-accent-bright); }
 
         .btn-cleanup.active, .btn-cleanup:hover { filter: brightness(0.9); }
 
@@ -212,12 +272,13 @@
         .content-area {
             flex: 1;
             position: relative;
-            background: white;
+            background: rgba(252, 11, 105, 0.1);
             border-radius: 12px;
             padding: 45px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 20px rgba(252, 11, 105, 0.15);
             backdrop-filter: none;
-            border: 1px solid #E8E8E8;
+            border: 1px solid rgba(252, 11, 105, 0.2);
+            color: var(--color-text);
         }
 
         .content-box {
@@ -229,7 +290,7 @@
         .content-box h2 {
             font-size: 2em;
             margin-bottom: 20px;
-            color: #1A3A52;
+            color: var(--color-primary);
             font-weight: 700;
             letter-spacing: -0.3px;
         }
@@ -237,7 +298,7 @@
         .content-box h3 {
             font-size: 1.35em;
             margin: 30px 0 15px 0;
-            color: #2C5282;
+            color: var(--color-accent-bright);
             font-weight: 600;
             position: relative;
             padding-bottom: 12px;
@@ -246,7 +307,7 @@
         .content-box p {
             font-size: 1em;
             line-height: 1.8;
-            color: #3C3C3C;
+            color: var(--color-text);
             margin-bottom: 20px;
         }
 
@@ -337,13 +398,14 @@
         }
 
         .content-box {
-            background: white;
+            background: rgba(252, 11, 105, 0.1);
             padding: 40px;
             border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-            border-top: 4px solid #2C5282;
+            box-shadow: 0 2px 8px rgba(252, 11, 105, 0.15);
+            border-top: 4px solid var(--color-accent-bright);
             position: relative;
             overflow: hidden;
+            color: var(--color-text);
         }
 
         .content-box::before {
@@ -353,7 +415,8 @@
             right: -50%;
             width: 300px;
             height: 300px;
-            background: radial-gradient(circle, rgba(44, 82, 130, 0.03) 0%, transparent 70%);
+            background: radial-gradient(circle, var(--color-primary), transparent 70%);
+            opacity: 0.05;
             border-radius: 50%;
             pointer-events: none;
         }
@@ -374,7 +437,7 @@
             animation: slideInList 0.5s ease-out forwards;
             opacity: 0;
             padding-left: 5px;
-            color: #444;
+            color: var(--color-background);
         }
 
         .content-box li:nth-child(1) { animation-delay: 0.05s; }
@@ -397,14 +460,14 @@
         }
 
         .highlight {
-            background: #E8F4F8;
+            background: rgba(252, 11, 105, 0.2);
             padding: 4px 10px;
             border-radius: 4px;
             font-weight: 600;
             box-shadow: none;
             position: relative;
-            color: #1A3A52;
-            border-left: 3px solid #2C5282;
+            color: var(--color-text);
+            border-left: 3px solid var(--color-accent-bright);
         }
 
         .card-grid {
@@ -417,10 +480,10 @@
         .info-card {
             padding: 15px;
             border-radius: 8px;
-            color: white;
+            color: var(--color-text);
             text-align: center;
             font-weight: 500;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 8px rgba(252, 11, 105, 0.3);
             transition: transform 0.2s, box-shadow 0.2s;
             animation: fadeIn 0.5s ease-out;
             position: relative;
@@ -444,15 +507,58 @@
 
         .info-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 12px rgba(252, 11, 105, 0.3);
         }
 
-        .card-1 { background: #2C5282; }
-        .card-2 { background: #34495E; }
-        .card-3 { background: #16A085; }
-        .card-4 { background: #27AE60; }
-        .card-5 { background: #C0392B; }
-        .card-6 { background: #8E44AD; }
+        .content-box {
+            background: rgba(252, 11, 105, 0.1);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(252, 11, 105, 0.15);
+            border-top: 4px solid var(--color-accent-bright);
+            position: relative;
+            overflow: hidden;
+            color: var(--color-text);
+        }
+
+        .content-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--color-primary), transparent 70%);
+            opacity: 0.05;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .content-box > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .content-box ul, .content-box ol {
+            margin-left: 25px;
+            margin-top: 12px;
+        }
+
+        .content-box li {
+            margin-bottom: 15px;
+            line-height: 1.8;
+            animation: slideInList 0.5s ease-out forwards;
+            opacity: 0;
+            padding-left: 5px;
+            color: var(--color-text);
+        }
+
+        .card-1 { background: var(--color-primary); }
+        .card-2 { background: var(--color-dark-primary); }
+        .card-3 { background: var(--color-accent-bright); }
+        .card-4 { background: var(--color-accent-bright); }
+        .card-5 { background: var(--color-accent-light); }
+        .card-6 { background: var(--color-accent-light); }
 
         .two-column {
             display: grid;
@@ -463,28 +569,30 @@
 
         .two-column > div {
             padding: 20px;
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(252, 11, 105, 0.1);
             border-radius: 12px;
-            backdrop-filter: blur(5px);
+            border: 1px solid rgba(252, 11, 105, 0.2);
+            color: var(--color-text);
         }
 
         .feature-box {
-            background: #F8F8F8;
+            background: rgba(252, 11, 105, 0.1);
             padding: 15px;
-            border-left: 3px solid #2C5282;
+            border-left: 3px solid var(--color-accent-bright);
             border-radius: 6px;
             margin: 8px 0;
             animation: slideInFeature 0.3s ease-out;
             transition: all 0.2s;
             position: relative;
             overflow: hidden;
+            color: var(--color-text);
         }
 
         .feature-box:hover {
-            background: #F0F4F8;
+            background: rgba(252, 11, 105, 0.15);
             border-left-width: 5px;
             padding-left: 12px;
-            box-shadow: 0 2px 6px rgba(44, 82, 130, 0.1);
+            box-shadow: 0 2px 6px rgba(252, 11, 105, 0.3);
         }
 
         @keyframes slideInFeature {
@@ -499,36 +607,36 @@
         }
 
         .equation {
-            background: #F8F8F8;
+            background: rgba(252, 11, 105, 0.1);
             padding: 20px;
             margin: 20px 0;
-            border: 2px solid #2C5282;
+            border: 2px solid var(--color-accent-bright);
             border-radius: 8px;
             font-weight: 600;
             text-align: center;
             font-size: 1.05em;
             letter-spacing: 0.3px;
             transition: all 0.2s;
-            box-shadow: 0 2px 8px rgba(44, 82, 130, 0.08);
+            box-shadow: 0 2px 8px rgba(252, 11, 105, 0.2);
             position: relative;
             overflow: hidden;
-            color: #1A3A52;
+            color: var(--color-text);
         }
 
         .equation:hover {
-            box-shadow: 0 4px 12px rgba(44, 82, 130, 0.12);
+            box-shadow: 0 4px 12px rgba(252, 11, 105, 0.3);
             transform: translateY(-2px);
         }
 
         .audio-controls {
-            background: linear-gradient(135deg, rgba(255, 77, 125, 0.05), rgba(255, 140, 0, 0.05));
+            background: rgba(252, 11, 105, 0.1);
             padding: 15px;
             border-radius: 12px;
             margin-top: 30px;
             text-align: center;
-            border: 1px solid rgba(255, 77, 125, 0.2);
+            border: 1px solid rgba(252, 11, 105, 0.2);
             font-size: 0.9em;
-            color: #666;
+            color: var(--color-text);
         }
 
         .audio-player {
@@ -536,16 +644,38 @@
             margin-top: 8px;
             height: 30px;
             cursor: pointer;
-            accent-color: #FF4D7D;
+            accent-color: var(--color-accent);
         }
+        
 
         .audio-player::-webkit-media-controls-mute-button {
             filter: brightness(0.8);
         }
 
+        /* Additional theme-aware styles */
+        .highlight-warning {
+            color: var(--color-accent-bright);
+            font-weight: 600;
+            margin: 15px 0;
+            opacity: 0.95;
+        }
+
+        .note-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(252, 11, 105, 0.1);
+            border-radius: 8px;
+            border-left: 5px solid var(--color-accent-light);
+        }
+
+        .equation-box {
+            border-color: var(--color-accent-bright);
+            background: rgba(252, 11, 105, 0.1);
+        }
+
         footer {
-            background: linear-gradient(135deg, #1A3A52 0%, #2C5282 100%);
-            color: white;
+            background: linear-gradient(135deg, var(--color-dark-primary) 0%, var(--color-primary) 100%);
+            color: var(--color-text);
             text-align: center;
             padding: 40px 30px 30px 30px;
             margin-top: 80px;
@@ -554,6 +684,14 @@
             z-index: 10;
             font-weight: 400;
             letter-spacing: 0.2px;
+        }
+
+        .responsive-box {
+            background: rgba(252, 11, 105, 0.1);
+        }
+
+        .responsive-box:hover {
+            background: rgba(252, 11, 105, 0.15);
         }
 
         @media (max-width: 1024px) {
@@ -606,32 +744,110 @@
         }
 
         .feature {
-            background: #F8F8F8;
+            background: rgba(252, 11, 105, 0.1);
             padding: 10px 12px;
-            border-left: 3px solid #2C5282;
+            border-left: 3px solid var(--color-accent-bright);
             border-radius: 4px;
             margin: 8px 0;
             animation: slideInFeature 0.3s ease-out;
             transition: all 0.2s;
             position: relative;
             left: 0;
-            color: #2C2C2C;
+            color: var(--color-text);
         }
 
         .feature:hover {
-            background: #F0F4F8;
+            background: rgba(252, 11, 105, 0.15);
             border-left-width: 5px;
             padding-left: 10px;
-            box-shadow: 0 2px 6px rgba(44, 82, 130, 0.1);
+            box-shadow: 0 2px 6px rgba(252, 11, 105, 0.3);
             left: 2px;
+        }
+
+        /* Bottom left buttons */
+        #playPauseButton {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            width: 36px;
+            height: 36px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 999;
+        }
+
+        #playPauseButton:hover svg {
+            transform: scale(1.1);
+        }
+
+        #githubButton {
+            position: fixed;
+            bottom: 56px;
+            left: 10px;
+            width: 36px;
+            height: 36px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 999;
+        }
+
+        #githubButton:hover svg {
+            transform: scale(1.1);
+        }
+
+        #arboriumButton {
+            position: fixed;
+            bottom: 10px;
+            left: 56px;
+            width: 36px;
+            height: 36px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 20px;
+            color: var(--color-primary);
+            transition: all 0.2s ease;
+        }
+
+        #arboriumButton:hover {
+            transform: scale(1.1);
         }
     </style>
 </head>
 <body>
+
+    
     <!-- Persistent Audio Player -->
     <audio id="backgroundAudio" style="display: none;">
         <source src="music/ambiant.flac" type="audio/flac">
     </audio>
+
+    <!-- Bottom Left Buttons -->
+    <button id="playPauseButton" title="Play/Pause">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24">
+            <path id="playPausePath" fill="none" stroke="var(--color-primary)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 15V9m4 6V9M2.586 16.726A2 2 0 0 1 2 15.312V8.688a2 2 0 0 1 .586-1.414l4.688-4.688A2 2 0 0 1 8.688 2h6.624a2 2 0 0 1 1.414.586l4.688 4.688A2 2 0 0 1 22 8.688v6.624a2 2 0 0 1-.586 1.414l-4.688 4.688a2 2 0 0 1-1.414.586H8.688a2 2 0 0 1-1.414-.586z"/>
+        </svg>
+    </button>
+
+    <button id="githubButton" title="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 20 20">
+            <path fill="var(--color-primary)" d="M20 10.25q0 3.351-1.908 6.027t-4.928 3.703q-.352.068-.514-.093a.54.54 0 0 1-.163-.4V16.67q0-1.295-.677-1.895a9 9 0 0 0 1.335-.24q.591-.16 1.223-.52a3.7 3.7 0 0 0 1.055-.888q.423-.528.69-1.402t.267-2.008q0-1.616-1.028-2.75q.48-1.214-.105-2.723q-.364-.12-1.054.147a7 7 0 0 0-1.198.587l-.495.32a9 9 0 0 0-2.5-.346a9 9 0 0 0-2.5.347a12 12 0 0 0-.553-.36q-.345-.214-1.088-.514q-.741-.3-1.12-.18q-.572 1.507-.09 2.722q-1.03 1.134-1.03 2.75q0 1.134.268 2.002q.267.867.683 1.401a3.5 3.5 0 0 0 1.048.894q.632.36 1.224.52q.593.162 1.335.241q-.52.48-.638 1.375a2.5 2.5 0 0 1-.586.2a3.6 3.6 0 0 1-.742.067q-.43 0-.853-.287q-.423-.288-.723-.834a2.1 2.1 0 0 0-.631-.694q-.384-.267-.645-.32l-.26-.04q-.273 0-.378.06t-.065.153a.7.7 0 0 0 .117.187a1 1 0 0 0 .17.16l.09.066q.287.135.567.508q.28.374.41.68l.13.307q.17.507.574.821q.404.315.872.4q.468.087.905.094q.436.006.723-.047l.299-.053q0 .507.007 1.188l.006.72q0 .24-.17.4q-.168.162-.52.094q-3.021-1.028-4.928-3.703Q0 13.6 0 10.25q0-2.79 1.341-5.145a10.1 10.1 0 0 1 3.64-3.73A9.6 9.6 0 0 1 10 0a9.6 9.6 0 0 1 5.02 1.375a10.1 10.1 0 0 1 3.639 3.73Q20 7.461 20 10.25" />
+        </svg>
+    </button>
+
+    <button id="arboriumButton" title="Visit arborium.dev" onclick="window.open('https://arborium.dev', '_blank')">
+        A
+    </button>
     
     <div class="page">
         <header>
@@ -748,7 +964,7 @@
                 <!-- CLEANUP SECTION -->
                 <div id="cleanup" class="content-box hidden">
                     <h2>Efforts de Nettoyage</h2>
-                    <p style="color: #c0392b; font-weight: 600; margin: 15px 0; opacity: 0.95;">Le nettoyage a été lent, incomplet et problématique. Quarante ans après la catastrophe, le site d'usine reste contaminé, et les habitants continuent de vivre avec de l'eau dangereuse.</p>
+                    <p class="highlight-warning">Le nettoyage a été lent, incomplet et problématique. Quarante ans après la catastrophe, le site d'usine reste contaminé, et les habitants continuent de vivre avec de l'eau dangereuse.</p>
                     <p>Immédiatement après la catastrophe, Union Carbide et le gouvernement indien présentèrent le nettoyage comme un succès. En réalité, ces efforts ne furent pas suffisants. La plupart des sols contaminés ne furent jamais excavés. À la place, on les couvrit simplement de béton, ce qui n'arrangea rien. L'eau souterraine restait toxique. Un nettoyage complet aurait coûté très cher et personne ne voulait le payer. Les résidents durent continuer à vivre près du danger, utilisant l'eau polluée pour cuisiner et boire.</p>
                     <p>Les gouvernements local et national ne fournirent jamais assez d'argent pour un vrai nettoyage. Les tribunaux ordonnèrent à Union Carbide de payer. Cependant, les montants donnés aux victimes étaient très faibles comparés aux dommages. Beaucoup de survivants reçurent moins de mille dollars en compensation. C'était loin de suffisant pour une vie entière de maladie et de souffrance. Union Carbide quitta le site dans les années 1990, laissant le problème à l'Inde. Le site reste jusqu'à aujourd'hui contaminé, un rappel de la négligence corporative.</p>
 
@@ -768,7 +984,7 @@
                         <div class="info-card card-5">Eau polluée encore utilisée</div>
                     </div>
 
-                    <p style="margin-top: 20px; padding: 15px; background: #FFF5E6; border-radius: 8px; border-left: 5px solid #FF8C00;"><strong>Aujourd'hui,</strong> le site n'est pas totalement décontaminé, et de nombreux résidents dépendent toujours d'eau polluée.</p>
+                    <p class="note-box"><strong>Aujourd'hui,</strong> le site n'est pas totalement décontaminé, et de nombreux résidents dépendent toujours d'eau polluée.</p>
                 </div>
 
                 <!-- SOLUTIONS SECTION -->
@@ -810,7 +1026,7 @@
                         <div class="info-card card-3">Rupture Catastrophique</div>
                     </div>
 
-                    <h3>Équation Word</h3>
+                    <h3>Équation Nominative</h3>
                     <div class="equation">
                         Isocyanate de méthyle + Eau → Méthylamine + Dioxyde de carbone
                     </div>
@@ -838,7 +1054,7 @@
                     </div>
 
                     <h3>Type de Réaction</h3>
-                    <div class="equation" style="border-color: #4169E1; background: #E6F3FF;">
+                    <div class="equation">
                         RÉACTION D'HYDROLYSE
                     </div>
 
@@ -860,22 +1076,61 @@
     </div>
 
     <script>
-        // Persistent background audio
-        document.addEventListener('DOMContentLoaded', () => {
-            const backgroundAudio = document.getElementById('backgroundAudio');
-            backgroundAudio.volume = 0.3;
-            backgroundAudio.loop = true;
-            
-            // Start playing when page loads
-            backgroundAudio.play().catch(err => {
-                console.log('Audio autoplay prevented by browser');
-            });
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Start audio
+            const audio = document.getElementById('backgroundAudio');
+            if (audio) {
+                audio.volume = 0.3;
+                audio.loop = true;
+                audio.play().catch(function() {
+                    console.log('Audio autoplay blocked');
+                });
+            }
+
+            // Play/Pause button functionality
+            const playPauseBtn = document.getElementById('playPauseButton');
+            const playPausePath = document.getElementById('playPausePath');
+            if (playPauseBtn && audio) {
+                // Set initial button color based on audio state
+                const updateButtonColor = function() {
+                    if (audio.paused) {
+                        playPausePath.setAttribute('stroke', 'var(--color-primary)');
+                    } else {
+                        playPausePath.setAttribute('stroke', 'var(--color-accent-bright)');
+                    }
+                };
+                updateButtonColor();
+
+                playPauseBtn.addEventListener('click', function() {
+                    if (audio.paused) {
+                        audio.play();
+                    } else {
+                        audio.pause();
+                    }
+                    updateButtonColor();
+                });
+
+                // Listen for audio state changes
+                audio.addEventListener('play', updateButtonColor);
+                audio.addEventListener('pause', updateButtonColor);
+            }
+
+            // GitHub button
+            const githubBtn = document.getElementById('githubButton');
+            if (githubBtn) {
+                githubBtn.addEventListener('click', function() {
+                    window.open('https://github.com/arborium-dev', '_blank');
+                });
+            }
         });
 
         function showSection(sectionId) {
             // Hide all sections
             const allSections = document.querySelectorAll('.content-box');
-            allSections.forEach(section => section.classList.add('hidden'));
+            allSections.forEach(function(section) {
+                section.classList.add('hidden');
+            });
 
             // Show selected section
             const selectedSection = document.getElementById(sectionId);
@@ -884,14 +1139,13 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
 
-            // Update active button
+            // Update button states
             const allButtons = document.querySelectorAll('.nav-btn');
-            allButtons.forEach(btn => btn.classList.remove('active'));
+            allButtons.forEach(function(btn) {
+                btn.classList.remove('active');
+            });
             
-            // Find and activate the clicked button
             event.target.classList.add('active');
-            
-            // Background audio continues playing (no interruption)
         }
     </script>
 </body>
