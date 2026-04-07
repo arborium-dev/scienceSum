@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Catastrophe de Bhopal</title>
+    
+</head>
+<body>
+
+    
+    <!-- Persistent Audio Player -->
+    <audio id="backgroundAudio" style="display: none;">
+        <source src="music/ambiant.flac" type="audio/flac">
+    </audio>
+
+    <!-- Bottom Left Buttons -->
+    <button id="playPauseButton" title="Play/Pause">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24">
+            <path id="playPausePath" fill="none" stroke="var(--color-primary)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 15V9m4 6V9M2.586 16.726A2 2 0 0 1 2 15.312V8.688a2 2 0 0 1 .586-1.414l4.688-4.688A2 2 0 0 1 8.688 2h6.624a2 2 0 0 1 1.414.586l4.688 4.688A2 2 0 0 1 22 8.688v6.624a2 2 0 0 1-.586 1.414l-4.688 4.688a2 2 0 0 1-1.414.586H8.688a2 2 0 0 1-1.414-.586z"/>
+        </svg>
+    </button>
+
+    <button id="githubButton" title="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 20 20">
+            <path fill="var(--color-primary)" d="M20 10.25q0 3.351-1.908 6.027t-4.928 3.703q-.352.068-.514-.093a.54.54 0 0 1-.163-.4V16.67q0-1.295-.677-1.895a9 9 0 0 0 1.335-.24q.591-.16 1.223-.52a3.7 3.7 0 0 0 1.055-.888q.423-.528.69-1.402t.267-2.008q0-1.616-1.028-2.75q.48-1.214-.105-2.723q-.364-.12-1.054.147a7 7 0 0 0-1.198.587l-.495.32a9 9 0 0 0-2.5-.346a9 9 0 0 0-2.5.347a12 12 0 0 0-.553-.36q-.345-.214-1.088-.514q-.741-.3-1.12-.18q-.572 1.507-.09 2.722q-1.03 1.134-1.03 2.75q0 1.134.268 2.002q.267.867.683 1.401a3.5 3.5 0 0 0 1.048.894q.632.36 1.224.52q.593.162 1.335.241q-.52.48-.638 1.375a2.5 2.5 0 0 1-.586.2a3.6 3.6 0 0 1-.742.067q-.43 0-.853-.287q-.423-.288-.723-.834a2.1 2.1 0 0 0-.631-.694q-.384-.267-.645-.32l-.26-.04q-.273 0-.378.06t-.065.153a.7.7 0 0 0 .117.187a1 1 0 0 0 .17.16l.09.066q.287.135.567.508q.28.374.41.68l.13.307q.17.507.574.821q.404.315.872.4q.468.087.905.094q.436.006.723-.047l.299-.053q0 .507.007 1.188l.006.72q0 .24-.17.4q-.168.162-.52.094q-3.021-1.028-4.928-3.703Q0 13.6 0 10.25q0-2.79 1.341-5.145a10.1 10.1 0 0 1 3.64-3.73A9.6 9.6 0 0 1 10 0a9.6 9.6 0 0 1 5.02 1.375a10.1 10.1 0 0 1 3.639 3.73Q20 7.461 20 10.25" />
+        </svg>
+    </button>
+
+    <button id="arboriumButton" title="Visit arborium.dev" onclick="window.open('https://arborium.dev', '_blank')">
+        A
+    </button>
+    
+    <div class="page">
+        <header>
+            <h1>La Catastrophe de Bhopal</h1>
+            <p>Découvrir le coût humain de la négligence industrielle</p>
+        </header>
+
+        <div class="container">
+            <!-- Navigation Hub -->
+            <div class="nav-hub">
+                <div class="center-circle">BHOPAL<br>1984</div>
+                <div class="nav-buttons">
+                    <button class="nav-btn btn-comment active" onclick="showSection('comment')">Comment</button>
+                    <button class="nav-btn btn-immediate" onclick="showSection('immediate')">Immédiat</button>
+                    <button class="nav-btn btn-long-term" onclick="showSection('long-term')">Long Terme</button>
+                    <button class="nav-btn btn-cleanup" onclick="showSection('cleanup')">Nettoyage</button>
+                    <button class="nav-btn btn-solutions" onclick="showSection('solutions')">Solutions</button>
+                    <button class="nav-btn btn-reaction" onclick="showSection('reaction')">Réaction</button>
+                    <button class="nav-btn btn-sources" onclick="showSection('sources')">Sources</button>
+                </div>
+            </div>
+
+            <!-- Content Display Area -->
+            <div class="content-area">
+                <!-- CAUSE SECTION -->
+                <div id="comment" class="content-box">
+                    <h2>Comment et Pourquoi</h2>
+                    <p>La catastrophe de Bhopal s'est déroulée du <span class="highlight">2 au 3 décembre 1984</span>, lorsqu'une grande fuite de gaz <span class="highlight">isocyanate de méthyle (MIC)</span> s'est produite. Cet incident à l'usine de pesticides Union Carbide en Inde devint l'une des pires catastrophes industrielles, affectant plusieurs centaines de milliers de personnes en quelques heures.</p>
+                    <p>La fuite s'est produite pendant une nuit ordinaire. L'usine produisait un pesticide courant à partir du MIC stocké dans le réservoir numéro 610. Normalement, ce chimique reste stable s'il est bien entreposé. Cependant, cette nuit-là, plusieurs erreurs critiques et mauvaises décisions se sont enchaînées. Ce qui aurait pu rester un problème technique mineur devint rapidement une tragédie. Ces défaillances transformèrent ce site industriel en source de mort et de souffrance massive.</p>
+                    <p>Cette catastrophe n'était pas un accident. Elle résultait directement de négligence et d'une mentalité qui mettait le profit avant la sécurité. L'usine n'était pas préparée aux urgences. Une enquête montra que tous les systèmes de sécurité avaient échoué. Certains avaient même été arrêtés volontairement pour faire des économies.</p>
+                    
+                    <!-- <div class="card-grid">
+                        <div class="info-card card-1">Systèmes de Sécurité Négligés</div>
+                        <div class="info-card card-2">Conception Défaillante</div>
+                        <div class="info-card card-5">Réductions de Coûts</div>
+                    </div> -->
+<!-- 
+                    <h3>Défaillances Clés</h3>
+                    <ul>
+                        <li>Refroidisseurs qui ne fonctionnaient pas - Les unités critiques ne fonctionnaient pas</li>
+                        <li>Alarmes désactivées - Aucun avertissement n'a été donné</li>
+                        <li>Maintenance insuffisante - L'usine était en mauvais état</li>
+                        <li>Peu d'employés - Peu d'ouvriers pour surveiller l'usine</li>
+                        <li>Eau dans le MIC - Déclenchement d'une réaction chimique violente</li>
+                    </ul> -->
+
+                    <h3>La Chaîne des Défaillances</h3>
+                    <p>Cette nuit-là, plusieurs problèmes se produisirent l'un après l'autre. De l'eau entra dans le réservoir MIC par un tuyau mal isolé. Cela déclencha une réaction chimique qui libère de la chaleur. La température à l'intérieur du réservoir monta rapidement. Les systèmes qui auraient dû arrêter cette réaction (comme refroidir le tuyau) avaient tous échoué ou n'avaient jamais bien fonctionné.</p>
+                    <p>À 00h30 le 3 décembre, le disque de rupture du réservoir se brisa. Environ 30 tonnes de gaz MIC toxique s'échappèrent dans l'air et formèrent un nuage blanc qui dériva lentement sur la ville endormie. Les sirènes ne sonneront pas et il n'y avait aucun plan d'évacuation. Les habitants se réveillèrent en suffoquant, les yeux brûlant, incapables de respirer.</p>
+
+                </div>
+
+                <!-- IMMEDIATE EFFECTS SECTION -->
+                <div id="immediate" class="content-box hidden">
+                    <h2>Effets Immédiats</h2>
+                    <p>Quand le nuage de gaz arriva, les effets furent <span class="highlight">terribles et immédiats</span>. En quelques heures, plus d'un demi-million de personnes furent exposées au gaz toxique. Les hôpitaux locaux n'étaient pas du tout préparés. Les gens coururent en panique, beaucoup sans savoir ce qui se passait ou comment réagir. Certains coururent vers la gare pour fuir, suffoquant en chemin. D'autres s'effondrèrent dans les rues.</p>
+                    <p>Les hôpitaux ont été débordés, d'abord des centaines, puis des milliers de patients arrivent ensemble. Les médecins ne savaient pas bien traiter l'empoisonnement au MIC. Les victimes arrivaient les yeux fermés, incapables de respirer, beaucoup inconscientes. Des rangées de gens restaient étendus dehors par manque de place. Il y avait trop de victimes pour tous les aider. Dans les jours et les semaines qui suivirent, les morts augmentaient. Entre 4 000 et 5 000 morts furent officiellement confirmés, bien que les vrais chiffres aient probablement été bien plus élevés.</p>
+
+                    <div class="two-column">
+                        <div>
+                            <h3>Santé Humaine</h3>
+                            <div class="feature">Détresse respiratoire grave</div>
+                            <div class="feature">Irritation oculaire et cécité</div>
+                            <div class="feature">Brûlures chimiques</div>
+                            <div class="feature">Convulsions et vomissements</div>
+                            <div class="feature">Dizaines de milliers de décès</div>
+                            <div class="feature">Plus d'un demi-million exposés</div>
+                        </div>
+                        <div>
+                            <h3>Environnement</h3>
+                            <div class="feature">Contamination du sol</div>
+                            <div class="feature">Contamination de l'eau</div>
+                            <div class="feature">Mort du bétail et faune</div>
+                            <div class="feature">Résidus chimiques persistants</div>
+                            <div class="feature">Nuage blanc toxique</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- LONG TERM EFFECTS SECTION -->
+                <div id="long-term" class="content-box hidden">
+                    <h2>Effets à Long Terme</h2>
+                    <p>Les conséquences de la catastrophe ne s'arrêtèrent pas en 1984. Elles continuèrent <span class="highlight">pendant des décennies</span>. Pour les survivants de Bhopal, la nuit de la catastrophe marqua seulement le début d'une longue souffrance. Les enfants nés après l'exposition souffraient de problèmes de santé. Même quarante ans plus tard, les hôpitaux locaux continuent de traiter les victimes dont les maladies viennent directement du gaz MIC libéré cette nuit-là.</p>
+                    <p>Les maladies de longue durée qui se développèrent dans les années suivantes furent aussi terribles que le jour du désastre. Les cas de cancer explosèrent. Les femmes exposées avaient du mal à avoir des enfants en bonne santé. Les problèmes respiratoires chroniques empêchaient des millions de personnes de travailler. Les survivants décrivaient une vie de douleur constante, de limitations physiques et de souffrance mentale qui ne disparut jamais vraiment.</p>
+                    
+                    <!-- <div class="card-grid">
+                        <div class="info-card card-3">Santé Chronique</div>
+                        <div class="info-card card-4">Écosystème</div>
+                    </div> -->
+
+                    <h3>Santé Humaine</h3>
+                    <ul>
+                        <li>Maladies respiratoires chroniques</li>
+                        <li>Problèmes oculaires permanents</li>
+                        <li>Troubles du système nerveux</li>
+                        <li>Difficultés à avoir des enfants</li>
+                        <li>Cancer plus fréquent</li>
+                        <li>Malformations à la naissance</li>
+                        <li>Trauma psychologique</li>
+                    </ul>
+
+                    <h3>Environnement</h3>
+                    <ul>
+                        <li>Sol contaminé par métaux lourds</li>
+                        <li>Eau souterraine polluée</li>
+                        <li>Site d'usine encore dangereux</li>
+                        <li>L'écosystème se rétablit lentement</li>
+                        <li>Les substances toxiques restent</li>
+                    </ul>
+
+                </div>
+
+                <!-- CLEANUP SECTION -->
+                <div id="cleanup" class="content-box hidden">
+                    <h2>Efforts de Nettoyage</h2>
+                    <p class="highlight-warning">Le nettoyage a été lent, incomplet et problématique. Quarante ans après la catastrophe, le site d'usine reste contaminé, et les habitants continuent de vivre avec de l'eau dangereuse.</p>
+                    <p>Après la catastrophe, Union Carbide et le gouvernement indien déclarèrent que le nettoyage était un succès. Sur le terrain, c'était faux. La plupart du sol empoisonné ne fut jamais enlevé. Au lieu de cela, on le couvrit simplement de béton, une solution facile qui ne résolvait rien. L'eau souterraine restait toxique. Un véritable nettoyage aurait coûté beaucoup d'argent, et personne ne voulait payer. Les habitants durent continuer à vivre près du danger, utilisant l'eau empoisonnée pour cuisiner et boire.</p>
+                    <p>Les gouvernements locaux et nationaux n'ont jamais donné assez argent pour un vrai nettoyage. Les tribunaux ont ordonné à Union Carbide de payer les victimes. Mais les sommes versées étaient bien trop basses comparées aux dégâts. Beaucoup de survivants ont reçu moins de mille dollars chacun. C'était loin de suffisant pour compenser une vie entière de maladie et de souffrance. Union Carbide a quitté le site dans les années 1990, abandonnant le problème à l'Inde. Aujourd'hui encore, le site reste empoisonné, un rappel de l'avarice des grandes compagnies.</p>
+
+                    <h3>Méthodes Utilisées</h3>
+                    <ul>
+                        <li>Enlèvement partiel du sol contaminé</li>
+                        <li>Recouvrement de béton (incomplet)</li>
+                        <li>Traitement limité de l'eau souterraine</li>
+                        <li>Projets gouvernementaux retardés</li>
+                        <li>Litiges juridiques constants</li>
+                    </ul>
+
+                    <h3>Situation Actuelle</h3>
+                    <div class="card-grid">
+                        <div class="info-card card-5">Pas entièrement décontaminé</div>
+                        <div class="info-card card-5">Résidents toujours affectés</div>
+                        <div class="info-card card-5">Eau polluée encore utilisée</div>
+                    </div>
+
+                    <p class="note-box"><strong>Aujourd'hui,</strong> le site n'est pas totalement décontaminé, et de nombreux résidents dépendent toujours d'eau polluée.</p>
+                </div>
+
+                <!-- SOLUTIONS SECTION -->
+                <div id="solutions" class="content-box hidden">
+                    <h2>Solutions et Prévention</h2>
+
+                    <div class="two-column">
+                        <div>
+                            <h3>Traiter les Conséquences</h3>
+                            <div class="feature">Nettoyage complet avec technologie moderne</div>
+                            <div class="feature">Soutien médical long terme</div>
+                            <div class="feature">Eau potable sûre</div>
+                            <div class="feature">Compensation transparente</div>
+                            <div class="feature">Surveillance indépendante</div>
+                        </div>
+                        <div>
+                            <h3>Prévenir à l'Avenir</h3>
+                            <div class="feature">Normes strictes de sécurité</div>
+                            <div class="feature">Maintenance obligatoire</div>
+                            <div class="feature">Quantités réduites de toxiques</div>
+                            <div class="feature">Inspections régulières indépendantes</div>
+                            <div class="feature">Responsabilité avec vraies conséquences</div>
+                        </div>
+                    </div>
+
+                    <p>Bhopal a forcé le monde à repenser les règles de sécurité des usines. Plusieurs lois nouvelles ont été créées en réponse directe (notamment la Directive Seveso en Europe et le Droit à l'Information aux États-Unis). Ces changements ont sauvé des vies en forçant les usines dangereuses à installer de meilleurs systèmes de sécurité, à informer le public sur les produits chimiques, et à créer des plans d'urgence.</p>
+                    <p>Cependant, les lois seules ne suffisent jamais. Elles doivent être équitablement appliquées. Surtout, une compagnie doit placer la sécurité et le bien-être des gens avant le profit. Bhopal montra ce qui se passe quand une corporation choisit d'économiser l'argent. Elle éteint les alarmes pour économiser l'électricité. Elle embauche moins d'ouvriers et les paye moins pour économiser. Elle garde des quantités dangereuses de produits chimiques près de villes peuplées. <em>La catastrophe de Bhopal montre que le développement industriel sans sécurité, transparence et responsabilité mène à la tragédie. Elle nous rappelle que les vies réelles de gens réels sont en jeu.</em>
+                </div>
+
+                <!-- CHEMICAL REACTION SECTION -->
+                <div id="reaction" class="content-box hidden">
+                    <h2>Réaction Chimique</h2>
+                    <p>Plusieurs signes montrent qu'une <span class="highlight">réaction chimique</span> se produisit à l'intérieur du réservoir. La température monta rapidement. La pression augmenta en quelques minutes à peine. Le MIC liquide devint du gaz qui s'échappa vite. Cette transformation de liquide en gaz était le pire scénario possible, mais l'usine ne disposait d'aucune défense.</p>
+                    <p>Le MIC (isocyanate de méthyle) est un chimique très réactif et très toxique. On l'utilise pour fabriquer les insecticides. Quand l'eau touche le MIC, une réaction se produit et libère de la chaleur. Cela accélère la réaction, générant encore plus de chaleur. C'est un cycle qui s'auto-alimente: plus de réaction = plus de chaleur. À mesure que la température augmente, le MIC liquide s'évapore de plus en plus vite, créant une bombe de pression chimique. Dans les usines bien construites, cette réaction est contrôlée et refroidie. Mais à Bhopal, tous ces systèmes de sécurité ont échoué ou avaient été arrêtés.</p>
+
+                    <!-- <div class="card-grid">
+                        <div class="info-card card-3">Réaction Exothermique Violente</div>
+                        <div class="info-card card-3">Accumulation de Pression</div>
+                        <div class="info-card card-3">Rupture Catastrophique</div>
+                    </div> -->
+
+                    <h3>Équation Nominative</h3>
+                    <div class="equation">
+                        Isocyanate de méthyle + Eau → Méthylamine + Dioxyde de carbone
+                    </div>
+
+                    <h3>Équation Chimique Balancée</h3>
+                    <div class="equation">
+                        CH₃NCO + H₂O → CH₃NH₂ + CO₂
+                    </div>
+
+                    <div class="two-column">
+                        <div>
+                            <h3>Composants</h3>
+                            <div class="feature">CH₃NCO = Isocyanate de méthyle</div>
+                            <div class="feature">H₂O = Eau</div>
+                            <div class="feature">CH₃NH₂ = Méthylamine</div>
+                            <div class="feature">CO₂ = Dioxyde de carbone</div>
+                        </div>
+                        <div>
+                            <h3>L'Équation est Balancée</h3>
+                            <div class="feature">1 carbone chaque côté</div>
+                            <div class="feature">3 hydrogènes chaque côté</div>
+                            <div class="feature">1 azote chaque côté</div>
+                            <div class="feature">2 oxygènes chaque côté</div>
+                        </div>
+                    </div>
+
+                    <h3>Type de Réaction</h3>
+                    <div class="equation">
+                        RÉACTION D'HYDROLYSE
+                    </div>
+
+                    <h3>Explication du Type de Réaction</h3>
+                    <p>L'hydrolyse est un type spécial de <span class="highlight">réaction de décomposition</span>. Dans une réaction de décomposition, une molécule grande se casse en molécules plus petites. L'hydrolyse est une décomposition qui se produit spécifiquement quand l'eau aide à casser les liaisons chimiques. Ici, l'eau (H₂O) réagit avec le MIC et le casse en produits plus simples: la méthylamine et le dioxyde de carbone. Le mot "hydrolyse" signifie littéralement "rupture par l'eau" il vient du grec "hydro" (eau) et "lysis" (rupture).</p>
+
+                    <h3>Détails de la Réaction</h3>
+                    <p>L'équation CH₃NCO + H₂O → CH₃NH₂ + CO₂ semble simple, mais elle représente un processus chimique violent avec des conséquences terribles. Quand l'eau touche le MIC, les molécules se cassent et se recombinent immédiatement en méthylamine et dioxyde de carbone. Cette réaction libère énormément de chaleur très rapidement.</p>
+                    <p>Cette chaleur soudaine crée la catastrophe. Dans un réservoir fermé rempli de MIC, la chaleur n'a nulle part où aller. Elle augmente la température à l'intérieur. Au fur et à mesure que la température monte, le MIC liquide s'évapore plus vite. Ce nouveau gaz crée une pression supplémentaire. Plus de pression accélère la réaction chimique. Un cycle dangereux commence: Plus de réaction → Plus de chaleur → Plus de vapeur → Plus de pression → Encore plus de réaction. Sans refroidissement ou sans trouver une sortie à la pression, le réservoir atteint des conditions dangereuses très rapidement. Le disque de rupture (la dernière ligne de défense) se brisa finalement. Environ 40 tonnes de gaz toxique s'échappèrent dans la nuit.</p>
+                </div>
+
+                <!-- SOURCES SECTION -->
+                <div id="sources" class="content-box hidden">
+                    <h2>Sources</h2>
+                    
+                    <ol>
+                        <li>
+                            Broughton, E. (2005). The Bhopal disaster and its aftermath: a review. <i>Columbia University Libraries</i>. https://academiccommons.columbia.edu/doi/10.7916/D8H70D8N
+                        </li>
+                        <li>
+                            Dow Corporate. (2023). <i>Bhopal.com</i>. Retrieved from https://www.bhopal.com/en-us.html
+                        </li>
+                        <li>
+                            International Dimensions of Ethics Education. (n.d.). Retrieved April 6, 2026, from https://www.umass.edu/sts/ethics/bhopal.html
+                        </li>
+                        <li>
+                            Laas, K. (2015). Bhopal Disaster Bibliography | Online Ethics. <i>Onlineethics.org</i>. https://onlineethics.org/cases/oec-bibliographies/bhopal-disaster-bibliography
+                        </li>
+                        <li>
+                            Shekhar, A., Poonam, Y., Yadav, K., Kumari, M. S., & Amer Research Taqa. (2023). Bhopal Gas Tragedy: Scientific Challenges and Lessons for Future. <i>ResearchGate</i>, 12(6), 2319–7463. https://www.researchgate.net/publication/372496541_Bhopal_Gas_Tragedy_Scientific_Challenges_and_Lessons_for_Future
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
